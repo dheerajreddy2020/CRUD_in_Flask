@@ -4,6 +4,11 @@ db.create_all()
 from details import *
 
 # route to get all students
+@app.route('/', methods=['GET'])
+def get_home():
+	return jsonify({'Students':'This is Home Page'})
+
+# route to get all students
 @app.route('/students', methods=['GET'])
 def get_students():
 	return jsonify({'Students': Details.get_all_students()})
@@ -28,7 +33,7 @@ def add_student():
 # route to update student with PUT method
 @app.route('/students/<int:id>', methods=['PUT'])
 def update_student(id):
-	'''Function to edit student in our database using movie id'''
+	'''Function to edit student in our database using student id'''
 	request_data = request.get_json()
 	Details.update_student(id, request_data["studentid"], request_data["firstname"],
 						request_data["lastname"], request_data["dob"],
